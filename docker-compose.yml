@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  db:
+    container_name: postgres-db
+    image: postgres:14.2
+    restart: always
+    environment:
+      POSTGRES_DATABASE: main
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_ROOT_PASSWORD: root
+    volumes:
+      - .dbdata:/var/lib/posgresql
+    ports:
+      - "55432:5432"
