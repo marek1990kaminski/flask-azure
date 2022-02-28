@@ -1,11 +1,30 @@
 version: '3.8'
 services:
+
+
+
+  backend:
+    container_name: azure-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'python main.py'
+    ports:
+      - "8001:5000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+
   db:
-    container_name: postgres-db
+    container_name: azure-postgres-db
     image: postgres:14.2
     restart: always
     environment:
-      POSTGRES_DATABASE: main
+      POSTGRES_DB: main
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_ROOT_PASSWORD: root
